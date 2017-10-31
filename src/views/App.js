@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import './App.css';
+import {itemsFetchData} from '../actions';
+import Residential from '../components/Residential';
+
 import TestCom from '../components/TestComponent';
 class App extends Component {
   render() {
@@ -12,13 +16,23 @@ class App extends Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
-<p>	{KEY}</p>
-<p>{BASE_URL}</p>
         </p>
-	<TestCom/>
+	<Residential />
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick: (id) => {
+      dispatch(itemsFetchData(id))
+    }
+  }
+}
+const mapStatetoProps = state => {
+        return {
+        my_store : state
+        }
+}
+export default connect(mapStatetoProps,mapDispatchToProps)(App);
