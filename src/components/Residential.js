@@ -21,17 +21,29 @@ const style = {
 	}
 }
 function ResList(listings, sometext) {
-	console.log(sometext);
-	listings = Object.values(listings);
-
 	var min_price=0;
-	var max_price=100000;
+	var max_price=1000000;
+
+if(sometext !== undefined) {
+	if(sometext.values !==undefined) {
+		if(sometext.values.min_price !==undefined) {
+			min_price=sometext.values.min_price;
+		}
+		if(sometext.values.max_price !==undefined) {
+			max_price=sometext.values.max_price;
+		}
+
+	}
+};
+	listings = Object.values(listings);
+console.log(min_price + ' ' + max_price);
 	const fill = listings.filter(function(el){
 
 		return el.price >= min_price &&
 					el.price <= max_price;
 
 	});
+	console.log(fill);
 	const listing = fill.map(function(listing,index) {
 		return (
 			<li index={index} style={style.card}>
@@ -89,7 +101,7 @@ if(listings.payload){console.log(listings);}
 const mapStatetoProps = state => {
 	return {
 	my_store : state,
-	filter : state.form
+	filter : state.form.simple
 	}
 }
 
