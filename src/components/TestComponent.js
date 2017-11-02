@@ -5,8 +5,6 @@ import * as action from '../actions';
 
 class TestCom extends Component {
 componentDidMount() {
-console.log(this.props);
-console.log(action.cass);
 }
 
 	render() {
@@ -33,4 +31,3 @@ const mapDispatchtoProps = dispatch => {
 }
 
 export default connect (mapStatetoProps,mapDispatchtoProps)(TestCom);
-

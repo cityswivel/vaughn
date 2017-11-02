@@ -2,8 +2,12 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-
+import { filterOn } from '../actions';
+import { filterOff } from '../actions';
 class MyForm extends Component {
+componentDidMount () {
+	console.log(this.props);
+}
         render() {
                 return (
       <div className="form">
@@ -20,7 +24,9 @@ class MyForm extends Component {
                   type="text"
                   placeholder="Max Price"
             />
-            <button type="submit" className="blue">Sign In</button>
+            <button type="button" className="blue" onClick={() => this.props.turnOnFilter(this.props.payload)}>Filter On</button>
+						<button type="button" className="blue" onClick={() => this.props.turnOffFilter()}>Filter Off</button>
+
           </form>
         </div>
       </div>
@@ -33,7 +39,15 @@ const reduxFormSignin = reduxForm({
 
 const mapStateToProps = (state) => {
     return {
+			payload: state.form.simple
     };
 };
+const mapDispatchtoProps = dispatch => {
+	return {
+		turnOnFilter : (payload) => dispatch(filterOn(payload)),
+		turnOffFilter : () => dispatch(filterOff()),
+	}
+}
 
-export default connect(mapStateToProps)(reduxFormSignin);
+
+export default connect(mapStateToProps,mapDispatchtoProps)(reduxFormSignin);
