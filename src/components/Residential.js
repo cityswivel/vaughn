@@ -8,35 +8,29 @@ import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import ResCard from './ResCard';
 import MyForm from './FilterForm';
-const style = {
-	list : {
-		margin: 0,
-		padding: 0,
-		listStyle: 'none',
-	},
-	card : {
-		width:'31%',
-		display: 'inline-block',
-		margin:'1%',
-
-	}
-}
-
+import LazyLoad from 'react-lazyload';
+import {styles} from '../styles/Styles';
+var _ = require('lodash');
 function getVisibleListings(listings, filter) {
 	switch(filter.filter_status) {
 		case 'SHOW_ALL':
 					return listings
 		case 'SHOW_FILTER' :
 			return listings.filter(function(el){
-				return el.price >= 100000
-				&& el.price <= 200000
+				return el.price >= 50000
+				&& el.price <= 250000
+				&& el.city == "Taos"
 			});
 
 			default:
-				return listings
+				return listings;
 	}
 }
-
+function sortVisibleListings(listings) {
+	console.log(typeof listings);
+	var sorted = _.orderBy(listings, 'price','desc');
+	return sorted
+}
 class Residential extends Component {
 componentDidMount() {
 	this.props.onTodoClick(BASE_URL + 'listings_residential?key='+KEY);
@@ -56,6 +50,7 @@ componentDidMount() {
 		var my_listings = this.props.visibleListings.map(function(data,i){
 		 var my_key = Math.random();
 			return (
+				<LazyLoad height={200} offset={100}>
 				<ResCard
 				key={my_key}
 				mls={data.mls}
@@ -63,14 +58,15 @@ componentDidMount() {
 				price={data.price}
 				description={data.description.substring(0,250)}
 				/>
+				</LazyLoad>
 
 			)
 		})
 		return(
-		<div>
+		<div style={styles.list.list_container}>
 		<MyForm />
 		<p>loaded</p>
-		<ul style={style.list}>{my_listings}</ul>
+		<ul style={styles.list.list}>{my_listings}</ul>
 		</div>
 		)
 	}
@@ -81,7 +77,7 @@ componentDidMount() {
 const mapStatetoProps = state => {
 	return {
 	my_store : state,
-	visibleListings : getVisibleListings(state.fetch.payload,state.filter)
+	visibleListings : sortVisibleListings(getVisibleListings(state.fetch.payload,state.filter))
 	}
 }
 

@@ -8,19 +8,7 @@ import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import ResCard from './ResCard';
 import MyForm from './FilterForm';
-const style = {
-	list : {
-		margin: 0,
-		padding: 0,
-		listStyle: 'none',
-	},
-	card : {
-		width:'31%',
-		display: 'inline-block',
-		margin:'1%',
-
-	}
-}
+import {styles} from '../styles/Styles';
 
 function getVisibleListings(listings, filter) {
 	switch(filter.filter_status) {
@@ -67,10 +55,10 @@ componentDidMount() {
 			)
 		})
 		return(
-		<div>
+		<div style={styles.list.list_container}>
 		<MyForm />
 		<p>loaded</p>
-		<ul style={style.list}>{my_listings}</ul>
+		<ul style={styles.list.list}>{my_listings}</ul>
 		</div>
 		)
 	}

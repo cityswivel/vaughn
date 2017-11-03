@@ -4,15 +4,16 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { filterOn } from '../actions';
 import { filterOff } from '../actions';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 class MyForm extends Component {
 componentDidMount () {
-	console.log(this.props);
 }
         render() {
                 return (
       <div className="form">
         <div className="container">
-          <h2>Sign In</h2>
+          <h2>Filter</h2>
           <form>
             <Field name="min_price"
                   component="input"
@@ -24,9 +25,12 @@ componentDidMount () {
                   type="text"
                   placeholder="Max Price"
             />
-            <button type="button" className="blue" onClick={() => this.props.turnOnFilter(this.props.payload)}>Filter On</button>
-						<button type="button" className="blue" onClick={() => this.props.turnOffFilter()}>Filter Off</button>
-
+						<TextField
+      hintText="Hint Text"
+      floatingLabelText="Floating Label Text"
+    /><br />
+<RaisedButton label="Filter On" onClick={() => this.props.turnOnFilter(this.props.payload)}/>
+<RaisedButton label="Filter Off" onClick={() => this.props.turnOffFilter()}/>
           </form>
         </div>
       </div>

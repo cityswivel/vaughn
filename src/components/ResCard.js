@@ -2,32 +2,9 @@ import React, { Component } from 'react';
 import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import { connect } from 'react-redux';
-
-const styles = {
-	card_wrapper : {
-		width:'100%',
-		borderRadius:'5px'
-	},
-	card_image : {
-		width: '100%'
-	},
-	card_title : {
-		position: 'absolute',
-		bottom: '5px',
-		left: '5px',
-		color: 'white'
-	},
-	card_description :{
-		padding:'5px',
-	},
-	card : {
-		width:'31%',
-		display: 'inline-block',
-		margin:'1%',
-
-	}
-}
-
+import {styles} from '../styles/Styles';
+import spinner from '../assets/spinner-gif-17.gif';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 class ResCard extends Component {
 	state = {
@@ -52,15 +29,25 @@ componentWillReceiveProps(nextProps) {
 }
 render () {
 	if (this.state.loading) {
-		return (<p>loading</p>);
+		return (<li style={styles.card.loading}>
+			<div style={styles.refresh_container}>
+			<RefreshIndicator
+			      size={40}
+			      left={10}
+			      top={0}
+			      status="loading"
+						style={styles.refresh}
+				/>
+			</div>
+			</li>);
 	}
 	return (
-		<li style={styles.card}>
-		<div style={styles.card_wrapper}>
+		<li style={styles.card.card}>
+		<div style={styles.card.card_wrapper}>
 			<div style={{borderRadius:'5px',width:'100%',paddingTop:'80%',background:'url('+this.state.data[0].link+')',backgroundSize:'cover',backgroundPosition:'center',position:'relative'}}>
-				<div style={styles.card_title}>{this.props.city} - {this.props.price}</div>
+				<div style={styles.card.card_title}>{this.props.city} - ${this.props.price}</div>
 			</div>
-			<div style={styles.card_description}>{this.props.description}</div>
+			<div style={styles.card.card_description}>{this.props.description}</div>
 		</div>
 		</li>
 	)
