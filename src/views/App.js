@@ -4,9 +4,7 @@ import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import './App.css';
 import {itemsFetchData} from '../actions';
-import Residential from '../components/Residential';
-
-import TestCom from '../components/TestComponent';
+import { Link } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
@@ -14,10 +12,11 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-	<Residential />
+        <ul>
+          <li><Link to='/'>residential</Link></li>
+					<li><Link to='/commercial'>commercial</Link></li>
+					<li><Link to='/land'>land</Link></li>
+        </ul>
       </div>
     );
   }

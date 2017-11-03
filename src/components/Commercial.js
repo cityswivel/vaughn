@@ -28,8 +28,8 @@ function getVisibleListings(listings, filter) {
 					return listings
 		case 'SHOW_FILTER' :
 			return listings.filter(function(el){
-				return el.price >= 100000
-				&& el.price <= 200000
+				return el.price >= 300000
+				&& el.price <= 400000
 			});
 
 			default:
@@ -37,9 +37,9 @@ function getVisibleListings(listings, filter) {
 	}
 }
 
-class Residential extends Component {
+class Commercial extends Component {
 componentDidMount() {
-	this.props.onTodoClick(BASE_URL + 'listings_residential?key='+KEY);
+	this.props.onTodoClick(BASE_URL + 'listings_commercial?key='+KEY);
 	//this.props.getImages(BASE_URL + 'all_images?key='+KEY);
 }
 
@@ -97,4 +97,4 @@ const mapDispatchtoProps = dispatch => {
 	}
 }
 
-export default connect (mapStatetoProps,mapDispatchtoProps)(Residential);
+export default connect (mapStatetoProps,mapDispatchtoProps)(Commercial);
