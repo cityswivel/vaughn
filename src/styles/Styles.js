@@ -16,18 +16,30 @@ export const styles = {
 			backgroundColor:'rgba(255,255,255,.6)',
 			padding:'5px',
 			borderRadius:'5px',
-			fontSize:'10px',
+			fontSize:'12px',
 			textTransform:'uppercase'
 		},
 		card_description :{
-			padding:'5px',
+			fontSize: '14px',
+			paddingTop:'5px',
+			paddingBottom:'5px',
 			minHeight:'120px',
+			borderBottomWidth: '1px',
+			borderBottomColor: '#cdcdcd',
+			borderBottomStyle: 'solid'
+		},
+		card_actions : {
+			paddingTop:'5px',
+			paddingBottom:'0px',
 		},
 		card : {
 			width:'31%',
 			display: 'inline-block',
 			margin:'1%',
 			verticalAlign: 'top',
+		},
+		info_wrapper : {
+			padding:'5px',
 		},
 		loading: {
 			width:'31%',

@@ -7,19 +7,19 @@ import {imagesFetchData} from '../actions';
 import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import ResCard from './ResCard';
-import MyForm from './FilterForm';
+import FilterForm from './FilterForm';
 import LazyLoad from 'react-lazyload';
 import {styles} from '../styles/Styles';
 var _ = require('lodash');
 function getVisibleListings(listings, filter) {
-	switch(filter.filter_status) {
+		switch(filter.filter_status) {
 		case 'SHOW_ALL':
 					return listings
 		case 'SHOW_FILTER' :
 			return listings.filter(function(el){
-				return el.price >= 50000
-				&& el.price <= 250000
-				&& el.city == "Taos"
+				return el.price >= filter.payload.min_price
+				&& el.price <= filter.payload.max_price
+
 			});
 
 			default:
@@ -27,7 +27,6 @@ function getVisibleListings(listings, filter) {
 	}
 }
 function sortVisibleListings(listings) {
-	console.log(typeof listings);
 	var sorted = _.orderBy(listings, 'price','desc');
 	return sorted
 }
@@ -64,7 +63,7 @@ componentDidMount() {
 		})
 		return(
 		<div style={styles.list.list_container}>
-		<MyForm />
+		<FilterForm />
 		<p>loaded</p>
 		<ul style={styles.list.list}>{my_listings}</ul>
 		</div>

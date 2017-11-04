@@ -1,7 +1,8 @@
 import * as actionType from '../actions/ActionType';
 
 const initialState = {
-		filter_status: 'SHOW_ALL'
+		filter_status: 'SHOW_ALL',
+		payload: {}
 	};
 
 const filterReducer = (state = initialState, action) => {

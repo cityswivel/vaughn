@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import {styles} from '../styles/Styles';
 import spinner from '../assets/spinner-gif-17.gif';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import { Link } from 'react-router-dom';
+var numeral = require('numeral');
 
 class ResCard extends Component {
 	state = {
@@ -45,9 +47,13 @@ render () {
 		<li style={styles.card.card}>
 		<div style={styles.card.card_wrapper}>
 			<div style={{borderRadius:'5px',width:'100%',paddingTop:'80%',background:'url('+this.state.data[0].link+')',backgroundSize:'cover',backgroundPosition:'center',position:'relative'}}>
-				<div style={styles.card.card_title}>{this.props.city} - ${this.props.price}</div>
+				<div style={styles.card.card_title}>{this.props.city} - ${numeral(this.props.price).format(0,0)}</div>
 			</div>
-			<div style={styles.card.card_description}>{this.props.description}</div>
+			<div style={styles.card.info_wrapper}>
+				<div style={styles.card.card_description}>{this.props.description}</div>
+				<div style={styles.card.card_actions}>SAVE - SEND - SHARE</div>
+				<div style={styles.card.card_actions}><Link to={`/listing/${this.props.mls}`}>{this.props.mls}</Link></div>
+			</div>
 		</div>
 		</li>
 	)

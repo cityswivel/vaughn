@@ -7,7 +7,7 @@ import {imagesFetchData} from '../actions';
 import {KEY} from '../config/Config';
 import {BASE_URL} from '../config/Config';
 import ResCard from './ResCard';
-import MyForm from './FilterForm';
+import FilterForm from './FilterForm';
 import {styles} from '../styles/Styles';
 
 function getVisibleListings(listings, filter) {
@@ -56,7 +56,7 @@ componentDidMount() {
 		})
 		return(
 		<div style={styles.list.list_container}>
-		<MyForm />
+		<FilterForm />
 		<p>loaded</p>
 		<ul style={styles.list.list}>{my_listings}</ul>
 		</div>
